@@ -1,8 +1,11 @@
 # User Stories with Acceptance Criteria
 
 Tax year: 2026-27 (1 July 2026 to 30 June 2027), salaried individuals, Pakistan.
-Each story names the job it serves (see `jobs-to-be-done.md`), a priority and a status.
-**Status is set from what the app does today.** Every story is currently **Not implemented**; statuses change only after the story is verified in the running app.
+Each story names the job it serves (see `jobs-to-be-done.md`) and a priority.
+**Status of each story** is shown in its header in two parts:
+
+- **Automated tests:** the verdict of the latest QA run of the Vitest unit tests and Playwright E2E tests, per story, on 2026-10-08. It is **🟢 Pass** (every test for the story ran and passed), **Fail** (a test failed) or **Can't execute** (the tests could not run). Chromium was used for every story, and Firefox and WebKit as well for S-12.
+- **Manual testing:** the author's own check of the story in the running app, filled in by hand after trying it. It starts as **Pending** and becomes **Implemented** (every criterion behaves as written) or **Not implemented**.
 
 ## Calculation rules the criteria rely on
 
@@ -21,7 +24,7 @@ Each story names the job it serves (see `jobs-to-be-done.md`), a priority and a 
 
 | Priority  | Stories             |
 | --------- | ------------------- |
-| P0 Must   | S-1, S-2, S-6       |
+| P0 Must   | S-1, S-12, S-2, S-6 |
 | P1 Should | S-3, S-4, S-7, S-11 |
 | P2 Could  | S-5, S-8, S-9, S-10 |
 
@@ -29,8 +32,11 @@ Each story names the job it serves (see `jobs-to-be-done.md`), a priority and a 
 
 ## S-1: Result cards
 
-**Serves J-2, J-3 (also J-1) | Role: Salaried Employee | Priority: P0 | Status: Not implemented**
+**Serves J-2, J-3 (also J-1) | Role: Salaried Employee | Priority: P0 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As a Salaried Employee, I want to enter my salary and see my monthly tax, monthly net pay, yearly income, yearly tax and yearly net pay, so that I know exactly what I take home.
+
+### Acceptance criteria
 
 - Given Monthly mode and I enter 100,000, when the result shows, then yearly income is 1,200,000, yearly tax is 6,000, yearly net is 1,194,000, monthly tax is 500 and monthly net is 99,500.
 - Given Annual mode and I enter 1,000,000, then yearly tax is 4,000, yearly net is 996,000, monthly tax is 333 and monthly net is 83,000.
@@ -46,10 +52,32 @@ As a Salaried Employee, I want to enter my salary and see my monthly tax, monthl
 - Given annual income of 1, then yearly tax is 0 and no error is shown.
 - Given a result is showing, when I change the amount to another valid number, then all five figures update without reloading the page.
 
+## S-12: Works in current browsers
+
+**Serves J-1, J-2, J-3, J-4, J-5 | Roles: all | Priority: P0 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
+As any user, I want the calculator to work in the browser I already use, so that I get the same figures and behavior whether I open it in Chrome, Edge, Firefox or Safari.
+
+### Acceptance criteria
+
+- Given a current version of Chrome, Edge, Firefox or Safari, when I open the app, then it loads with the title "Pakistan Salary Tax Calculator 2026-27", the heading, "Tax year 2026-27" and the slab table, and no error screen.
+- Given any of those browsers, when I choose Monthly and enter 100,000, then I see the same five figures as in S-1: monthly tax PKR 500, monthly net PKR 99,500, yearly income PKR 1,200,000, yearly tax PKR 6,000 and yearly net PKR 1,194,000.
+- Given any of those browsers, when I enter "abc", then I see "Salary must be a number" and no results; and when I then enter a valid amount, the error disappears and the results appear.
+- Given any of those browsers, when I type a "." into the field, then nothing is entered; and when I enter "100000.50", then the field shows "100000".
+- Given any of those browsers, when I enter 100,000 in Annual mode and switch to Monthly, then the field shows "8,333" and yearly income still shows PKR 100,000.
+- Given any of those browsers, when I press Reset with a result showing, then the field is empty, the results are gone and Monthly is selected.
+- Given any of those browsers, then every amount shows "PKR" with comma thousands separators and no decimal point, for example "PKR 3,498,974,000" for an annual income of 10,000,000,000.
+- Given a 375 px wide screen in Firefox or Safari (WebKit), then the page does not scroll sideways.
+
+How this is checked: Chrome and Edge share the Chromium engine, so Chromium stands for both. Firefox runs in Firefox, and Safari is checked with WebKit, the engine Safari uses. WebKit is a close stand-in, not Safari itself, so a real Safari and a real Edge are checked by hand and recorded under Manual testing.
+
 ## S-2: Monthly or annual input
 
-**Serves J-3 (also J-2) | Role: Job Seeker | Priority: P0 | Status: Not implemented**
+**Serves J-3 (also J-2) | Role: Job Seeker | Priority: P0 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As a Job Seeker, I want to enter my salary as either a monthly or a yearly amount, so that I can use the figure exactly as my offer states it.
+
+### Acceptance criteria
 
 - Given the app has just opened, then Monthly mode is selected.
 - Given Monthly mode and I enter 100,000, then the app treats my income as 1,200,000 per year.
@@ -65,8 +93,11 @@ As a Job Seeker, I want to enter my salary as either a monthly or a yearly amoun
 
 ## S-3: Slab breakdown
 
-**Serves J-1, J-4 | Role: HR/Payroll Officer | Priority: P1 | Status: Not implemented**
+**Serves J-1, J-4 | Role: HR/Payroll Officer | Priority: P1 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As an HR/Payroll Officer, I want to see how much income fell into each slab and the tax from each, so that I can verify and explain the figure.
+
+### Acceptance criteria
 
 - Given annual income of 2,000,000, then the breakdown lists three slabs: 0 to 600,000 with 600,000 at 0% giving tax 0; 600,001 to 1,200,000 with 600,000 at 1% giving tax 6,000; and 1,200,001 to 2,200,000 with 800,000 at 11% giving tax 88,000; and the slab taxes add up to the yearly tax of 94,000.
 - Given annual income of 600,000, then the breakdown lists only the 0% slab with 600,000 and tax 0.
@@ -75,8 +106,11 @@ As an HR/Payroll Officer, I want to see how much income fell into each slab and 
 
 ## S-4: Effective tax rate
 
-**Serves J-1, J-2 | Role: Salaried Employee | Priority: P1 | Status: Not implemented**
+**Serves J-1, J-2 | Role: Salaried Employee | Priority: P1 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As a Salaried Employee, I want to see the share of my income that goes to tax, so that I understand my overall tax burden.
+
+### Acceptance criteria
 
 - Given annual income of 5,000,000 (yearly tax 802,000), then the effective rate shows "16.04%".
 - Given annual income of 2,000,000, then the effective rate shows "4.70%".
@@ -85,8 +119,11 @@ As a Salaried Employee, I want to see the share of my income that goes to tax, s
 
 ## S-5: Marginal tax rate
 
-**Serves J-5 | Role: Job Seeker | Priority: P2 | Status: Not implemented**
+**Serves J-5 | Role: Job Seeker | Priority: P2 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As a Job Seeker, I want to see the tax rate that applies to my next rupee of income, so that I can judge what a raise is worth.
+
+### Acceptance criteria
 
 - Given annual income of 2,000,000, then the marginal rate shows "11%".
 - Given annual income of 5,000,000, then the marginal rate shows "29%".
@@ -97,8 +134,11 @@ As a Job Seeker, I want to see the tax rate that applies to my next rupee of inc
 
 ## S-6: Invalid input and recovery
 
-**Serves J-1, J-2, J-3, J-4, J-5 | Roles: all | Priority: P0 | Status: Not implemented**
+**Serves J-1, J-2, J-3, J-4, J-5 | Roles: all | Priority: P0 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As any user, I want a clear message when my input cannot be used and an easy way to carry on, so that I never see a wrong result.
+
+### Acceptance criteria
 
 - Given the field is empty or only spaces, then I see "Enter your salary" and no results are shown.
 - Given I enter letters or mixed text such as "abc" or "12abc", then I see "Salary must be a number" and no results are shown.
@@ -112,8 +152,11 @@ As any user, I want a clear message when my input cannot be used and an easy way
 
 ## S-7: Tax year and disclaimer
 
-**Serves J-4 (also J-1, J-3) | Role: HR/Payroll Officer | Priority: P1 | Status: Not implemented**
+**Serves J-4 (also J-1, J-3) | Role: HR/Payroll Officer | Priority: P1 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As an HR/Payroll Officer, I want every result to state the tax year and that it is an estimate, so that nobody treats it as an official figure.
+
+### Acceptance criteria
 
 - Given any page state, then I see "Tax year 2026-27" on the page.
 - Given a result is showing, then I see the notice "Estimate only. This is not tax advice. Confirm your tax with FBR or a tax professional."
@@ -121,8 +164,11 @@ As an HR/Payroll Officer, I want every result to state the tax year and that it 
 
 ## S-8: Slab reference table
 
-**Serves J-4 | Role: HR/Payroll Officer | Priority: P2 | Status: Not implemented**
+**Serves J-4 | Role: HR/Payroll Officer | Priority: P2 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As an HR/Payroll Officer, I want to see the full list of slabs and rates on the page, so that I can check the rates myself.
+
+### Acceptance criteria
 
 - Given the page is open and no amount has been entered, then I see a table of all eight slabs with income range, fixed amount and rate.
 - Given the table is shown, then its figures match the slabs listed at the top of this document.
@@ -130,8 +176,11 @@ As an HR/Payroll Officer, I want to see the full list of slabs and rates on the 
 
 ## S-9: Reset
 
-**Serves J-3 (also J-1, J-2, J-4, J-5) | Roles: all | Priority: P2 | Status: Not implemented**
+**Serves J-3 (also J-1, J-2, J-4, J-5) | Roles: all | Priority: P2 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As any user, I want to clear everything with one action, so that I can start a new calculation.
+
+### Acceptance criteria
 
 - Given results are showing, when I press Reset, then the field is empty, the results and breakdown are gone, no error is shown and Monthly mode is selected.
 - Given an error is showing, when I press Reset, then the field is empty and the error is gone.
@@ -139,8 +188,11 @@ As any user, I want to clear everything with one action, so that I can start a n
 
 ## S-10: Phone-width layout
 
-**Serves J-2, J-3 | Roles: Salaried Employee, Job Seeker | Priority: P2 | Status: Not implemented**
+**Serves J-2, J-3 | Roles: Salaried Employee, Job Seeker | Priority: P2 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As a Job Seeker or Salaried Employee, I want to use the calculator on my phone, so that I can check a figure wherever I am.
+
+### Acceptance criteria
 
 - Given a screen 375 pixels wide, when a result with the full breakdown is showing, then there is no horizontal scrolling of the page.
 - Given a screen 375 pixels wide, then the input, the Reset control, all result figures and the disclaimer are readable and can be reached without zooming.
@@ -148,8 +200,11 @@ As a Job Seeker or Salaried Employee, I want to use the calculator on my phone, 
 
 ## S-11: PKR formatting and pasted numbers
 
-**Serves J-1, J-2, J-3 | Roles: Salaried Employee, Job Seeker | Priority: P1 | Status: Not implemented**
+**Serves J-1, J-2, J-3 | Roles: Salaried Employee, Job Seeker | Priority: P1 | Automated tests: 🟢 Pass | Manual testing: 🟢 Pass**
+
 As a Salaried Employee, I want amounts shown with thousands separators and a currency label and to be able to paste a formatted number, so that I can read and enter figures easily.
+
+### Acceptance criteria
 
 - Given a result, then every amount appears with thousands separators and the PKR label, for example "PKR 1,194,000".
 - Given a very large result such as 3,498,974,000, then it is shown in full digits with separators and never in scientific notation.

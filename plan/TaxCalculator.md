@@ -83,11 +83,11 @@ No surcharge.
 
 ## Story priorities (build and cut order)
 
-| Priority  | Stories                                                                                            | Rule                                                                                 |
-| --------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| P0 Must   | S-1 Result cards, S-6 Invalid input and recovery, S-2 Monthly or annual input                      | Core purpose and the assignment's error-handling requirement; built first, never cut |
-| P1 Should | S-3 Slab breakdown, S-7 Tax year and disclaimer, S-11 PKR formatting and paste, S-4 Effective rate | Make the result trustworthy and explainable                                          |
-| P2 Could  | S-9 Reset, S-8 Slab reference table, S-10 Phone-width layout, S-5 Marginal rate                    | Polish; first to be marked Not implemented if they cannot be verified                |
+| Priority  | Stories                                                                                                       | Rule                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| P0 Must   | S-1 Result cards, S-12 Works in current browsers, S-6 Invalid input and recovery, S-2 Monthly or annual input | Core purpose and the assignment's error-handling requirement; built first, never cut |
+| P1 Should | S-3 Slab breakdown, S-7 Tax year and disclaimer, S-11 PKR formatting and paste, S-4 Effective rate            | Make the result trustworthy and explainable                                          |
+| P2 Could  | S-9 Reset, S-8 Slab reference table, S-10 Phone-width layout, S-5 Marginal rate                               | Polish; first to be marked Not implemented if they cannot be verified                |
 
 Build and QA order follows priority: P0, then P1, then P2.
 
@@ -99,7 +99,7 @@ Build and QA order follows priority: P0, then P1, then P2.
 | 1.2 | Write `CLAUDE.md` (coding rules) and `Constraints.md` (business rules) | `CLAUDE.md`                                                              | Coding rules in place with Vitest and Playwright named; business rules B-1 to B-6 in `Constraints.md`, matching the stories' calculation rules           |
 | 1.3 | Write roles                                                            | `docs/app-roles.md`                                                      | 3 roles, each with can / must never                                                                                                                      |
 | 1.4 | Write jobs                                                             | `docs/jobs-to-be-done.md`                                                | J-1..J-5, each names a role, none mention the app                                                                                                        |
-| 1.5 | Write stories                                                          | `docs/user-stories.md`                                                   | S-1..S-11 with Given/When/Then, priorities, all Not implemented for now                                                                                  |
+| 1.5 | Write stories                                                          | `docs/user-stories.md`                                                   | S-1..S-12 with Given/When/Then, priorities, all Not implemented for now                                                                                  |
 | 1.6 | User reviews the docs                                                  | Approval                                                                 | User can explain every line                                                                                                                              |
 | 1.7 | Scaffold                                                               | package.json, Vite/TS/ESLint/Prettier/Vitest config, .gitignore          | `npm install`, `lint` and `npm test` run on an empty app                                                                                                 |
 | 1.8 | Build the QA agent                                                     | `.claude/agents/qa-subagent.md`, `playwright.config.ts`, `tests/` folder | Agent definition matches the section above; Playwright installed with its Chromium browser; `webServer` starts the Vite dev server; one smoke run passes |
@@ -160,7 +160,7 @@ Vitest config lives in `vite.config.ts`. Playwright config is in `playwright.con
 - All test cases are written and run by `qa-subagent`, not by the developer agent. This keeps tests independent of the code.
 - Unit tests (Vitest) cover logic and components. E2E tests (Playwright) cover user journeys against the running app.
 - Each acceptance criterion becomes at least one test named after its story.
-- E2E runs on Chromium only (free, no paid services); cross-browser checking is done manually in task 4.3.
+- E2E runs on Chromium for every spec, and on Chromium, Firefox and WebKit for the browser-compatibility story S-12 (free, no paid services). Chromium stands for Chrome and Edge; WebKit stands in for Safari. A real Safari and Edge are checked by hand in task 4.3.
 - No snapshot tests.
 
 ## Open decisions

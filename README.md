@@ -16,7 +16,9 @@ The calculator serves three kinds of people (full descriptions in [docs/app-role
 | Job Seeker         | Weighing an offer quoted as a gross (often yearly) package      | A quick answer for several amounts, and the value of an extra rupee |
 | HR/Payroll Officer | Prepares salary estimates for others and may have to justify it | The working: tax per slab, the slab table, the tax year             |
 
-**Why this calculator:** salary tax is a calculation people in Pakistan do not get right easily, and the rules (slabs, boundaries, rounding) are precise enough to specify and test exhaustively. That fits a small app that is well specified rather than large. The product thinking is in [docs/jobs-to-be-done.md](docs/jobs-to-be-done.md) and [docs/user-stories.md](docs/user-stories.md) (11 stories with acceptance criteria and priorities). The business rules behind them are in [Constraints.md](Constraints.md).
+**Why this calculator:** salary tax is a calculation people in Pakistan do not get right easily, and the rules (slabs, boundaries, rounding) are precise enough to specify and test exhaustively. That fits a small app that is well specified rather than large. The product thinking is in [docs/jobs-to-be-done.md](docs/jobs-to-be-done.md) and [docs/user-stories.md](docs/user-stories.md) (12 stories with acceptance criteria and priorities). The business rules behind them are in [Constraints.md](Constraints.md).
+
+**Status of each story:** every story in [docs/user-stories.md](docs/user-stories.md) shows two statuses in its header. **Automated tests** is the latest QA verdict (Pass, Fail or Can't execute): all 12 stories passed on 2026-10-08, with S-12 (browser compatibility) checked in Chromium, Firefox and WebKit. **Manual testing** is the author's own check in the running app (Pending, then Implemented or Not implemented).
 
 ## What the app does
 
@@ -58,10 +60,10 @@ npm run preview
   npm test
   ```
 
-- **End-to-end tests** (Playwright, Chromium) drive the real app in a browser. Install the browser once, then run them. They start the dev server themselves:
+- **End-to-end tests** (Playwright) drive the real app in a browser: Chromium for every spec, and Chromium, Firefox and WebKit (the engine Safari uses) for the browser-compatibility story S-12. Install the browsers once, then run them. They start the dev server themselves:
 
   ```bash
-  npx playwright install chromium
+  npx playwright install chromium firefox webkit
   npm run test:e2e
   ```
 
@@ -100,7 +102,7 @@ None. All code, tests and documents were written by the AI tools described above
 
 ## Known limits
 
-- Automated tests run on **Chromium only**. Firefox, Safari and Edge, real phones, screen readers, keyboard feel and colour contrast have not been checked.
+- Automated tests run on Chromium (standing for Chrome and Edge), Firefox and WebKit (a stand-in for Safari) for the browser-compatibility story S-12; every other spec runs on Chromium only. A real Safari and a real Edge, real phones, screen readers, keyboard feel and colour contrast have not been checked.
 - The **error fallback screen** (shown only if the app crashes) cannot be triggered from a browser test and has not been checked.
 - The slab figures are not confirmed against the official Act (see above).
 

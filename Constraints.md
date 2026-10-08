@@ -67,3 +67,9 @@ An income exactly on a slab boundary belongs to the lower slab for tax. The rate
 ## B-6 Slab data is the single source
 
 - The slab figures come from the Finance Act 2026 as reported by four independent sources (checked 2026-10-08); they have not been compared against the official Act text. The sources are listed in `src/data/slabs.ts` and in the README.
+
+## B-7 Browsers
+
+- The app must run, with the same figures and behavior, in a current version of **Chrome, Edge, Firefox and Safari** (the assignment's requirement). It uses no browser-specific code.
+- Chrome and Edge share the Chromium engine. Automated checks therefore run in Chromium (all E2E specs), Firefox (the browser-compatibility spec) and WebKit, the engine Safari uses (the same spec). WebKit is a close stand-in, not Safari itself, so a real Safari and a real Edge are checked by hand.
+- Number grouping and formatting must be identical in every browser: "PKR 1,194,000", never a locale-dependent variant.
