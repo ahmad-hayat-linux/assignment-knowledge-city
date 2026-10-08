@@ -4,7 +4,7 @@ A small web app that estimates income tax and take-home pay for **salaried indiv
 
 - **Live app:** <https://assignment-knowledge-city.onrender.com/> (hosted on Render; the first load can take a moment if the site has been idle). You can also run it locally by following the steps below.
 - **It is an estimate, not tax advice.** The app says so on every result.
-- **Main contributor:** Ahmad Hayat. He chose the app, defined the roles, jobs, stories and rules, directed the AI tools, and reviewed and tested what they produced. The code and tests were written with Claude Code (see [AI tools and models used](#ai-tools-and-models-used)).
+- **Main contributor:** **Ahmad Hayat**. He chose the app, defined the roles, jobs, stories and rules, directed the AI tools, and reviewed and tested what they produced. The code and tests were written with Claude Code (see [AI tools and models used](#ai-tools-and-models-used)).
 
 ## What it is and who it is for
 
@@ -86,7 +86,7 @@ None. All code, tests and documents were written by the AI tools described above
 
 ## Assumptions
 
-- **One tax year and one taxpayer type:** salaried individuals, tax year 2026-27 only. There are no deductions, allowances, zakat or other income.
+- **One tax year and one taxpayer type:** salaried individuals, tax year 2026-27 only.
 - **Slab figures come from secondary sources.** They were taken from four independent sources that agree on every slab (checked 2026-10-08) and have **not** been compared against the official Finance Act 2026 text. The sources are listed in [src/data/slabs.ts](src/data/slabs.ts). Treat the figures as unconfirmed until checked against FBR:
   - <https://vialtopartners.com/regional-alerts/pakistan-employment-tax-finance-bill-2026-27-summary>
   - <https://cssprep.com.pk/income-tax-slabs-2026-27-pakistan-salaried-class/>
