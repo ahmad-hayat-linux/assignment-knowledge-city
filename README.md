@@ -2,8 +2,9 @@
 
 A small web app that estimates income tax and take-home pay for **salaried individuals in Pakistan**, using the 2026-27 tax slabs (1 July 2026 to 30 June 2027). Enter a monthly or yearly salary and see the tax, the net pay, how the tax is built up slab by slab, and the tax rates that apply.
 
-- **Live app:** not deployed yet (the link will be added here and in the submission email once the app is on Render).
+- **Live app:** <https://assignment-knowledge-city.onrender.com/> (hosted on Render; the first load can take a moment if the site has been idle). You can also run it locally by following the steps below.
 - **It is an estimate, not tax advice.** The app says so on every result.
+- **Main contributor:** Ahmad Hayat. He chose the app, defined the roles, jobs, stories and rules, directed the AI tools, and reviewed and tested what they produced. The code and tests were written with Claude Code (see [AI tools and models used](#ai-tools-and-models-used)).
 
 ## What it is and who it is for
 
@@ -102,6 +103,37 @@ None. All code, tests and documents were written by the AI tools described above
 - Automated tests run on **Chromium only**. Firefox, Safari and Edge, real phones, screen readers, keyboard feel and colour contrast have not been checked.
 - The **error fallback screen** (shown only if the app crashes) cannot be triggered from a browser test and has not been checked.
 - The slab figures are not confirmed against the official Act (see above).
+
+## Build plan, constraints and rules
+
+These three files are how the project was directed. Together they let anyone rebuild or adapt it.
+
+### The plan: [plan/TaxCalculator.md](plan/TaxCalculator.md)
+
+The step-by-step plan the app was built from: who does what (developer agent and QA agent), the tasks in four phases (foundation and docs, logic, UI, verification), the story priorities, the files created, the testing approach and a time estimate. To reuse the project:
+
+```bash
+git clone <this repository>
+cd <the cloned folder>
+npm install
+```
+
+Then read the plan from the top. It lists the order of work, so you can follow it to rebuild the app or change it for another tax year (a new year only needs changes to `src/data/slabs.ts` and the tax year label in `src/constants.ts`).
+
+### The constraints: [Constraints.md](Constraints.md)
+
+The business rules the app must obey, in short:
+
+- **Scope:** salaried-individual income tax for tax year 2026-27 only, shown as an estimate with the tax year and a notice on every result.
+- **Slabs:** eight slabs from 0% up to 35%, with no surcharge.
+- **Input:** monthly (default) or annual amounts in whole rupees only. Decimals cannot be typed, commas and spaces are ignored, and the maximum is PKR 10,000,000,000 a year.
+- **Errors:** an empty, non-numeric, negative or too-large amount shows a clear message and no result.
+- **Rounding:** nearest rupee, with exact halves rounding up. Monthly figures stay within 0.5 rupee of the true value, and switching between monthly and annual never changes a result.
+- **Display:** amounts as `PKR 1,194,000`, effective rate with two decimals, marginal rate with none.
+
+### The coding rules: [CLAUDE.md](CLAUDE.md)
+
+The rules the AI coding tool follows, kept separate from the business rules above: TypeScript everywhere, arrow-function components, all styles in `style.ts`, all types in `types.ts`, all display text and console messages in `constants.ts`, tax logic kept out of components, no custom hooks, ESLint and Prettier passing, and Vitest and Playwright tests written by the QA agent. It also lists the accessibility, code quality and workflow practices.
 
 ## Project layout
 
