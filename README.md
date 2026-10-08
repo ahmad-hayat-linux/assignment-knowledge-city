@@ -125,8 +125,8 @@ These three files are how the project was directed. Together they let anyone reb
 The step-by-step plan the app was built from: who does what (developer agent and QA agent), the tasks in four phases (foundation and docs, logic, UI, verification), the story priorities, the files created, the testing approach and a time estimate. To reuse the project:
 
 ```bash
-git clone <this repository>
-cd <the cloned folder>
+git clone https://github.com/ahmad-hayat-linux/assignment-knowledge-city.git
+cd assignment-knowledge-city
 npm install
 ```
 
