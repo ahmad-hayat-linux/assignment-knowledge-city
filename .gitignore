@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+test-results
+playwright-report
+blob-report
+.env
+.env.*
+.DS_Store
+*.log
+*.tsbuildinfo
+.vitest
+.claude/settings.local.json
+report
