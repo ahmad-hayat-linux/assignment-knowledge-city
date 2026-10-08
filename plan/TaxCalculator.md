@@ -42,7 +42,7 @@ File: `.claude/agents/qa-subagent.md`
 5. ESLint and Prettier configured and passing.
 6. All console messages in `src/constants.ts`.
 7. All display strings in `src/constants.ts`.
-8. **Testing:** unit tests for `src/lib/` use Vitest; everything on screen is tested with Playwright E2E (no component tests). No Jest anywhere. **All tests live in the root `tests/` folder (`tests/unit/`, `tests/e2e/`, `tests/setup.ts`), never inside `src/`.** Tests are written and run by `qa-subagent`; the developer agent does not write test cases.
+8. **Testing:** unit tests for `src/lib/` use Vitest; everything on screen is tested with Playwright E2E (no component tests). No Jest anywhere. **All tests live in the root `tests/` folder (`tests/unit/`, `tests/e2e/`), never inside `src/`.** Tests are written and run by `qa-subagent`; the developer agent does not write test cases.
 9. Professional practices: structure by `lib/`, `data/`, `components/`; tax logic kept out of components in pure functions; **no custom hooks** (hooks from React or libraries are fine, but we write none ourselves, so there is no `hooks/` folder; reusable logic goes in plain functions in `lib/`); input validated at the boundary; no NaN/Infinity ever rendered; accessible labels and `role="alert"` errors; error boundary; no secrets, no dead code; story statuses reflect verified behavior only; run lint, format check and `tsc --noEmit` before finishing any change, and request a QA run from `qa-subagent` before marking a story Implemented.
 
 ## Slabs (verify in task 1.1)
@@ -150,7 +150,7 @@ docs/app-roles.md  docs/jobs-to-be-done.md  docs/user-stories.md
 src/main.tsx  src/App.tsx  src/types.ts  src/constants.ts  src/style.ts
 src/data/slabs.ts  src/lib/{tax,validate,format}.ts
 src/components/{IncomeForm,ResultCards,SlabBreakdown,SlabTable,Disclaimer,ErrorBoundary}.tsx
-Written by qa-subagent, all under tests/: tests/setup.ts  tests/unit/lib/*.test.ts  tests/e2e/*.spec.ts
+Written by qa-subagent, all under tests/: tests/unit/lib/*.test.ts  tests/e2e/*.spec.ts
 Written by qa-subagent after each run: report/story-[number]-[timestamp].md```
 
 Vitest config lives in `vite.config.ts`. Playwright config is in `playwright.config.ts`.

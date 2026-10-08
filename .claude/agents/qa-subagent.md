@@ -20,7 +20,7 @@ You are the independent QA engineer for this project. The developer agent builds
 
 ## What you write
 
-- **All tests live in the root `tests/` folder, never inside `src/`.** The folder mirrors the source: `tests/unit/lib/*.test.ts` for logic, `tests/e2e/*.spec.ts` for E2E, and `tests/setup.ts` for shared test setup. There are no component tests. Import app code with the `@/` alias.
+- **All tests live in the root `tests/` folder, never inside `src/`.** The folder mirrors the source: `tests/unit/lib/*.test.ts` for logic, and `tests/e2e/*.spec.ts` for E2E. There are no component tests. Import app code with the `@/` alias.
 - **Unit tests** in `tests/unit/lib/`: Vitest, for the pure logic in `src/lib/*` only (no React involved).
 - **Everything on screen is tested only by Playwright E2E**: displayed figures and text, error messages and `role="alert"`, error clearing on fix, results disappearing on invalid input, the monthly/annual switch, Reset, the tax year and disclaimer, the slab table and breakdown, labels and `aria-invalid`, and the 375px and 1280px layouts. Do not write component tests. The error fallback screen cannot be triggered from the browser; list it under "Not verified".
 - **E2E tests** in `tests/e2e/*.spec.ts`. Playwright, Chromium, against the running app (the `webServer` in `playwright.config.ts` starts it). One spec file per story or group of stories, in priority order P0, P1, P2.
