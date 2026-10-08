@@ -2,7 +2,7 @@
 
 A small web app that estimates income tax and take-home pay for **salaried individuals in Pakistan**, using the 2026-27 tax slabs (1 July 2026 to 30 June 2027). Enter a monthly or yearly salary and see the tax, the net pay, how the tax is built up slab by slab, and the tax rates that apply.
 
-- **Live app:** <https://assignment-knowledge-city.onrender.com/> (hosted on Render; the first load can take a moment if the site has been idle). You can also run it locally by following the steps below.
+- **Live app:** <https://ahmad-hayat-tax-calculator-2026-27.onrender.com/> (hosted on Render; the first load can take a moment if the site has been idle). You can also run it locally by following the steps below.
 - **It is an estimate, not tax advice.** The app says so on every result.
 - **Main contributor:** **Ahmad Hayat**. He chose the app, defined the roles, jobs, stories and rules, directed the AI tools, and reviewed and tested what they produced. The code and tests were written with Claude Code (see [AI tools and models used](#ai-tools-and-models-used)).
 
