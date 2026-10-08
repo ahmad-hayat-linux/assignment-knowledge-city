@@ -104,6 +104,16 @@ None. All code, tests and documents were written by the AI tools described above
 - The **error fallback screen** (shown only if the app crashes) cannot be triggered from a browser test and has not been checked.
 - The slab figures are not confirmed against the official Act (see above).
 
+## To do
+
+- [ ] **Git hooks with Husky (planned, not done yet).** To enforce branching conventions, commit messages and pushes:
+  - commit messages in Conventional Commits format (checked with commitlint), for example `fix(validate): reject decimal input`;
+  - branch names like `feature/short-description` (also `fix/`, `docs/`, `test/`, `chore/`, `refactor/`);
+  - no direct commits or pushes on `main`, with changes merged through pull requests;
+  - a pre-commit check that runs ESLint and Prettier on the changed files, plus a type-check.
+
+  The packages (`husky`, `lint-staged`, `@commitlint/cli`, `@commitlint/config-conventional`), a `prepare` script and a `lint-staged` setting are already in `package.json`, but **no hooks are installed or enforced today**.
+
 ## Build plan, constraints and rules
 
 These three files are how the project was directed. Together they let anyone rebuild or adapt it.
