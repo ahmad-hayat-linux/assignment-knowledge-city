@@ -1,0 +1,3 @@
+sh scripts/check-branch.sh commit || exit 1
+npx lint-staged || exit 1
+npm run typecheck

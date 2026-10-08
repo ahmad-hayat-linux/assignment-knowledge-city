@@ -151,7 +151,8 @@ src/main.tsx  src/App.tsx  src/types.ts  src/constants.ts  src/style.ts
 src/data/slabs.ts  src/lib/{tax,validate,format}.ts
 src/components/{IncomeForm,ResultCards,SlabBreakdown,SlabTable,Disclaimer,ErrorBoundary}.tsx
 Written by qa-subagent, all under tests/: tests/unit/lib/*.test.ts  tests/e2e/*.spec.ts
-Written by qa-subagent after each run: report/story-[number]-[timestamp].md```
+Written by qa-subagent after each run: report/story-[number]-[timestamp].md
+```
 
 Vitest config lives in `vite.config.ts`. Playwright config is in `playwright.config.ts`.
 

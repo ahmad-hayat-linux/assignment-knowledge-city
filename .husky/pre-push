@@ -1,0 +1,4 @@
+# Git passes one line per ref being pushed: <local ref> <local sha> <remote ref> <remote sha>
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+  sh scripts/check-branch.sh push "$remote_ref" || exit 1
+done

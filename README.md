@@ -106,15 +106,15 @@ None. All code, tests and documents were written by the AI tools described above
 - The **error fallback screen** (shown only if the app crashes) cannot be triggered from a browser test and has not been checked.
 - The slab figures are not confirmed against the official Act (see above).
 
-## To do
+## Git workflow (Husky hooks)
 
-- [ ] **Git hooks with Husky (planned, not done yet).** To enforce branching conventions, commit messages and pushes:
-  - commit messages in Conventional Commits format (checked with commitlint), for example `fix(validate): reject decimal input`;
-  - branch names like `feature/short-description` (also `fix/`, `docs/`, `test/`, `chore/`, `refactor/`);
-  - no direct commits or pushes on `main`, with changes merged through pull requests;
-  - a pre-commit check that runs ESLint and Prettier on the changed files, plus a type-check.
+Git hooks, installed by Husky when you run `npm install`, keep the history consistent:
 
-  The packages (`husky`, `lint-staged`, `@commitlint/cli`, `@commitlint/config-conventional`), a `prepare` script and a `lint-staged` setting are already in `package.json`, but **no hooks are installed or enforced today**.
+- **Branch names** must start with `feature/`, `epic/` or `bug/`, followed by a lowercase name of letters, digits and hyphens, for example `feature/slab-breakdown`, `epic/browser-support` or `bug/rounding-half`.
+- **No commits or pushes on `main`.** Create a branch, push it and merge through a pull request.
+- **Commit messages** use the Conventional Commits format, checked with commitlint: `type(optional-scope): subject`, where the type is `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, `ci` or `revert`. Example: `fix(validate): reject decimal input`.
+- **Before each commit,** ESLint and Prettier run on the changed files and the project is type-checked.
+- In an emergency only, `SKIP_BRANCH_POLICY=1 git commit ...` skips the branch rule. The rules live in `.husky/`, `scripts/check-branch.sh`, `.commitlintrc.json` and the `lint-staged` setting in `package.json`.
 
 ## Build plan, constraints and rules
 
@@ -167,6 +167,7 @@ tests/
   e2e/                 Playwright specs, one per story or group of stories
 .claude/agents/        the QA subagent definition
 .github/workflows/     the final-deployment workflow
+.husky/, scripts/      Git hooks and the branch-name check
 ```
 
 Built with React 19, Vite, TypeScript, Vitest, Playwright, ESLint and Prettier.
